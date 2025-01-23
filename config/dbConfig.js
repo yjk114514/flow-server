@@ -1,7 +1,7 @@
 module.exports = {
-    host     : 'localhost',
+    host     : '8.140.54.111',
     user     : 'root',
-    password : 'flow-server',
-    database : 'flow-server',
+    password : 'FlowServer',
+    database : 'FlowServer',
     port     : 3306
 };
