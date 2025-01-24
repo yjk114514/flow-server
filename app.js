@@ -23,6 +23,10 @@ const productsRouter = require('./routes/products');
 
 // 保存原始的 console.log
 
+const authMiddleware = require('./middlewares/authMiddleware');
+
+// 全局应用身份验证中间件
+app.use(authMiddleware);
 
 app.use('/users', usersRouter);
 app.use('/products', productsRouter);
