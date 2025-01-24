@@ -20,18 +20,28 @@ function generateUUID() {
 
 
 
-function generateToken(password) {
+function generateToken(UUID) {
     // 定义一个密钥，用于 HMAC 算法，实际应用中应存储在安全的地方
     const secretKey = 'a1a30bb4-2fad-41de-9c22-cafbc5d10409';
-    // 将 password 和 createdAt 拼接成一个字符串
-    const createdAt = new Date().toISOString();
-    const dataToHash = `${password}:${createdAt}`;
     // 使用 HMAC-SHA256 算法进行加密
     const hmac = crypto.createHmac('sha256', secretKey);
-    hmac.update(dataToHash);
+    hmac.update(UUID);
     // 生成十六进制的 token
     return hmac.digest('hex');
+}
+const validateToken = (token, UUID) => {
+    // 定义一个密钥，用于 HMAC 算法，实际应用中应存储在安全的地方
+    const secretKey = 'a1a30bb4-2fad-41de-9c22-cafbc5d10409';
+    // 使用 HMAC-SHA256 算法进行加密
+    const hmac = crypto.createHmac('sha256', secretKey);
+    hmac.update(UUID);
+    // 生成十六进制的 token
+    const expectedToken = hmac.digest('hex');
+    // 比较生成的 token 和传入的 token 是否相等
+    return token === expectedToken;
 }
 
 exports.generateUUID = generateUUID;
 exports.generateToken = generateToken;
+exports.validateToken = validateToken;
+

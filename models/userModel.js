@@ -2,7 +2,7 @@
 
 const mysql = require('mysql2');
 const dbConfig = require('../config/dbConfig');
-const {generateUUID,generateToken} = require('../utils/getToken');
+const {generateUUID,generateToken} = require('../utils/auth');
 // const connection = mysql.createConnection(dbConfig);
 // connection.connect();
 
