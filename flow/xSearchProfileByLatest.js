@@ -3,6 +3,7 @@ const {requestWithRetry} = require("../network/request")
 const axios = require("axios");
 const {response} = require("express");
 const fs = require("fs");
+const netConfig = require("../config/netConfig.js")
 
 exports.xSearchProfileByLatest = async function (req) {
     const xData = {}
@@ -49,12 +50,7 @@ exports.xSearchProfileByLatest = async function (req) {
         return axios.create({
             // baseURL: encodeURI(baseURL + formData),
             headers: xAccounts["accounts"][xAccounts["currentAccountIndex"]].headers,
-            timeout: 10000,
-            proxy: {
-                host: '127.0.0.1',
-                port: 7890,
-                protocol: 'http:'
-            },
+            ...netConfig
         })
     }
     await requestWithRetry(encodeURI(baseURL + formData), getAxiosInstance, (errorStatus) => {

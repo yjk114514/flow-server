@@ -41,7 +41,7 @@ axios.defaults.proxy = {
     port: 7890,
     protocol: 'http:'
 };
-res = axios.get(encodeURI(baseURL + formData), {headers: currentAccount.headers})
+res = axios.get(encodeURI(baseURL + formData), {headers: xAccounts["accounts"][xAccounts["currentAccountIndex"]].headers})
     .then(response => {
         console.log(response.data)
     })
