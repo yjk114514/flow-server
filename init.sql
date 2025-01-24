@@ -8,3 +8,6 @@ CREATE TABLE `users` (
     `email` VARCHAR(255) NOT NULL UNIQUE,
     `token` VARCHAR(255) NOT NULL
 );
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' WITH GRANT OPTION;
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'FlowServer';
+FLUSH PRIVILEGES;

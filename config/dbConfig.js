@@ -1,5 +1,5 @@
 module.exports = {
-    host     : '8.140.54.111',
+    host     : '127.0.0.1',
     user     : 'root',
     password : 'FlowServer',
     database : 'FlowServer',

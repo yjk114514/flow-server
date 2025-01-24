@@ -18,7 +18,7 @@ async function requestWithRetry(URL,getAxiosInstance,whetherRetry) {
         break;
       }
       if (whetherRetry && whetherRetry(error.status)) {
-        console.log(`重试第 ${retries} 次...`);
+        console.log(`${error.status}重试第 ${retries} 次...`);
          // 继续重试
       } else {
         errorOccurred = true;

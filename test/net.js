@@ -36,11 +36,11 @@ const features = {
     "responsive_web_enhance_cards_enabled": false
 }
 const formData = "variables=" + JSON.stringify(variables) + "&features=" + JSON.stringify(features)
-axios.defaults.proxy = {
-    host: '127.0.0.1',
-    port: 7890,
-    protocol: 'http:'
-};
+// axios.defaults.proxy = {
+//     host: '127.0.0.1',
+//     port: 7890,
+//     protocol: 'http:'
+// };
 res = axios.get(encodeURI(baseURL + formData), {headers: xAccounts["accounts"][xAccounts["currentAccountIndex"]].headers})
     .then(response => {
         console.log(response.data)
