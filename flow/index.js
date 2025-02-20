@@ -1,54 +1,28 @@
-const {xSearchTimelineByTop} = require('./xSearchTimelineByTop');
-const {xSearchTimelineByLatest} = require('./xSearchTimelineByLatest');
-const {xSearchProfileByTop} = require('./xSearchProfileByTop');
-const {xSearchProfileByLatest} = require('./xSearchProfileByLatest');
+const {xSearchTimeline} = require('./xSearch/req/xSearchTimeline');
+const {xSearchProfile} = require('./xSearch/req/xSearchProfile');
 
 exports.generateDataFlow = async function* (req) {
     switch (req.query.flowId) {
-        case 'xSearchTimelineByTop':
-            let xSearchTimelineByTopSendTimes = 0;
+        case 'xSearchTimeline':
+            let xSearchTimelineSendTimes = 0;
             while (true) {
-                const generateData = await xSearchTimelineByTop(req);
-                if (generateData === null || xSearchTimelineByTopSendTimes >= 100) {
+                const generateData = await xSearchTimeline(req);
+                if (generateData === null || xSearchTimelineSendTimes >= 100) {
                     break;
                 } else {
-                    xSearchTimelineByTopSendTimes++;
+                    xSearchTimelineSendTimes++;
                     yield generateData;
                 }
             }
             break
-        case 'xSearchTimelineByLatest':
-            let xSearchTimelineByLatestSendTimes = 0;
+        case 'xSearchProfile':
+            let xSearchProfileSendTimes = 0;
             while (true) {
-                const generateData = await xSearchTimelineByLatest(req);
-                if (generateData === null || xSearchTimelineByLatestSendTimes >= 100) {
+                const generateData = await xSearchProfile(req);
+                if (generateData === null || xSearchProfileSendTimes >= 100) {
                     break;
                 } else {
-                    xSearchTimelineByLatestSendTimes++;
-                    yield generateData;
-                }
-            }
-            break
-        case 'xSearchProfileByTop':
-            let xSearchProfileByTopSendTimes = 0;
-            while (true) {
-                const generateData = await xSearchProfileByTop(req);
-                if (generateData === null || xSearchProfileByTopSendTimes >= 100) {
-                    break;
-                } else {
-                    xSearchProfileByTopSendTimes++;
-                    yield generateData;
-                }
-            }
-            break
-        case 'xSearchProfileByLatest':
-            let xSearchProfileByLatestSendTimes = 0;
-            while (true) {
-                const generateData = await xSearchProfileByLatest(req);
-                if (generateData === null || xSearchProfileByLatestSendTimes >= 100) {
-                    break;
-                } else {
-                    xSearchProfileByLatestSendTimes++;
+                    xSearchProfileSendTimes++;
                     yield generateData;
                 }
             }
@@ -56,22 +30,4 @@ exports.generateDataFlow = async function* (req) {
         default:
             return null;
     }
-    // if (req.query.flowId === 'xSearchTimelineByTop') {
-    //     let sendTimes = 0;
-    //     while (true) {
-    //         console.log(`xFlow ${sendTimes}`);
-    //         const generateData = await xSearchTimelineByTop(req);
-    //         if (generateData === null || sendTimes >= 100) {
-    //             console.log(`xFlowCallback ${sendTimes}, break`);
-    //             console.log(`${generateData === null} or ${sendTimes >= 100}`)
-    //             break;
-    //         } else {
-    //             sendTimes++;
-    //             yield generateData;
-    //             console.log(`xFlowCallback ${sendTimes}`);
-    //         }
-    //     }
-    // } else {
-    //     return null;
-    // }
 }
